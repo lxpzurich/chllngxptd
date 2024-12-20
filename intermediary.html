@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Intermediary Iframe</title>
+</head>
+<body>
+    <script>
+        async function fetchGoogleDriveFile() {
+            const googleDriveFileUrl = 'https://drive.google.com/uc?id=1kPSS3khDvcnFXKK3c-JagBrCXk70yRj6&export=download';
+
+            try {
+                const response = await fetch(googleDriveFileUrl);
+                if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
+
+                const htmlContent = await response.text();
+
+                // Send the content back to the parent
+                parent.postMessage(htmlContent, '*');
+            } catch (error) {
+                console.error('Error fetching Google Drive file:', error);
+                parent.postMessage('Failed to fetch content.', '*');
+            }
+        }
+
+        // Fetch and send the content when loaded
+        fetchGoogleDriveFile();
+    </script>
+</body>
+</html>
