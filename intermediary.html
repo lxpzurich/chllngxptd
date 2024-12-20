@@ -16,7 +16,7 @@
 
                 const htmlContent = await response.text();
 
-                // Send the content back to the parent
+                // Send the content back to the parent as a string
                 parent.postMessage(htmlContent, '*');
             } catch (error) {
                 console.error('Error fetching Google Drive file:', error);
