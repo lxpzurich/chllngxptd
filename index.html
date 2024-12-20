@@ -7,7 +7,8 @@
 </head>
 <body>
     <h1>Parent Page</h1>
-    <iframe id="content-iframe" src="https://lxpzurich.github.io/chllngxptd/intermediary.html" style="width: 100%; height: 300px; border: 1px solid #ddd;"></iframe>
+    <iframe id="content-iframe" src="https://lxpzurich.github.io/chllngxptd/intermediary.html" 
+            style="width: 100%; height: 300px; border: 1px solid #ddd;"></iframe>
     <div id="rendered-content" style="margin-top: 20px; border: 1px solid #ccc; padding: 10px;">
         Waiting for content...
     </div>
@@ -18,7 +19,14 @@
             if (event.origin !== 'https://lxpzurich.github.io') return;
 
             const content = event.data;
-            document.getElementById('rendered-content').innerHTML = content;
+
+            // Ensure the message contains a string
+            if (typeof content === 'string') {
+                document.getElementById('rendered-content').innerHTML = content;
+            } else {
+                console.error('Unexpected message format:', content);
+                document.getElementById('rendered-content').innerHTML = 'Error: Unexpected content format.';
+            }
         });
     </script>
 </body>
