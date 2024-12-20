@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parent Page</title>
+</head>
+<body>
+    <h1>Parent Page</h1>
+    <iframe id="content-iframe" src="https://lxpzurich.github.io/intermediary.html" style="width: 100%; height: 300px; border: 1px solid #ddd;"></iframe>
+    <div id="rendered-content" style="margin-top: 20px; border: 1px solid #ccc; padding: 10px;">
+        Waiting for content...
+    </div>
+
+    <script>
+        window.addEventListener('message', (event) => {
+            // Only accept messages from the GitHub Pages iframe
+            if (event.origin !== 'https://lxpzurich.github.io') return;
+
+            const content = event.data;
+            document.getElementById('rendered-content').innerHTML = content;
+        });
+    </script>
+</body>
+</html>
